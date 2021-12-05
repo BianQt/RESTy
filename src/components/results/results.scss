@@ -1,0 +1,19 @@
+$backgroundColor: #000000;
+
+
+  
+  .results{
+    background: $backgroundColor;
+    color: rgb(58, 238, 52);
+    width: 40%;
+    margin: 1em auto;
+    text-align: left;
+    box-shadow: 3px 2px 5px #aaaaaabf;
+    padding: 2em 4em;
+    box-sizing: border-box;
+    min-height: 26.7em;
+  }
+
+  .results div{
+    color: #e91857;
+  }
