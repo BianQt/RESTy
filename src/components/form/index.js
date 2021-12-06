@@ -1,37 +1,88 @@
-import React from 'react';
+import React, { useState } from "react";
 
-import './form.scss';
+import "./form.scss";
 
 function Form(props) {
+  const [method, setMethod] = useState("GET");
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon");
 
- function handleSubmit(e){
+  async function handleSubmit(e) {
     e.preventDefault();
+    
+    console.log("--------------------------");
+    console.log(e.target.data.value);
     const formData = {
-      method:'GET',
-      url: 'https://pokeapi.co/api/v2/pokemon',
+      method: method,
+      url: url,
     };
-    props.handleApiCall(formData);
+
+    const raw = e.target.data.value;
+    const requestOptions = {
+      method: method,
+      body: raw,
+    };
+    let data;
+    method==='GET' ?
+    data = await fetch(url) : data = await fetch(url, requestOptions)
+
+    const dataParsed = await data.json();
+    console.log("data===============>", dataParsed);
+
+    props.handleApiCall(formData, dataParsed.results);
   }
 
- 
-    return (
-      <>
-        <form onSubmit={handleSubmit}>
-          <label >
-            <span>URL: </span>
-            <input name='url' type='text' />
-            <button type="submit">GO!</button>
-          </label>
-          <label className="methods">
-            <span id="get">GET</span>
-            <span id="post">POST</span>
-            <span id="put">PUT</span>
-            <span id="delete">DELETE</span>
-          </label>
-        </form>
-      </>
-    );
-  
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label>
+          <span>URL: </span>
+          <input
+            name="url"
+            type="text"
+            onChange={(e) => {
+              setUrl(e.target.value);
+            }}
+          />
+          <button type="submit">GO!</button>
+        </label>
+        <label className="methods">
+          <span
+            id="get"
+            onClick={() => {
+              setMethod("GET");
+            }}
+          >
+            GET
+          </span>
+          <span
+            id="post"
+            onClick={() => {
+              setMethod("POST");
+            }}
+          >
+            POST
+          </span>
+          <span
+            id="put"
+            onClick={() => {
+              setMethod("PUT");
+            }}
+          >
+            PUT
+          </span>
+          <span
+            id="delete"
+            onClick={() => {
+              setMethod("DELETE");
+            }}
+          >
+            DELETE
+          </span>
+        </label>
+        <textarea name="data" style={{ width: "500px" }}></textarea>
+      </form>
+    </>
+  );
 }
 
 export default Form;
