@@ -1,7 +1,7 @@
 # RESTy
  ## URLs
-  - [Pull-request](https://github.com/BianQt/RESTy/pull/2) 
-  - [SandBox](https://codesandbox.io/s/zen-hugle-9nqu7)
+  - [Pull-request](https://github.com/BianQt/RESTy/pull/3) 
+  - [Live-Page](https://BianQt.github.io/RESTy)
 
 ## UML 
 ![UML](./uml.jpg)
