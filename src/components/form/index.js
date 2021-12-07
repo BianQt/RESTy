@@ -8,27 +8,15 @@ function Form(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    
-    console.log("--------------------------");
-    console.log(e.target.data.value);
     const formData = {
       method: method,
       url: url,
     };
 
     const raw = e.target.data.value;
-    const requestOptions = {
-      method: method,
-      body: raw,
-    };
-    let data;
-    method==='GET' ?
-    data = await fetch(url) : data = await fetch(url, requestOptions)
+    
 
-    const dataParsed = await data.json();
-    console.log("data===============>", dataParsed);
-
-    props.handleApiCall(formData, dataParsed.results);
+    props.handleApiCall(formData,raw);
   }
 
   return (
