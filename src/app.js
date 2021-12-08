@@ -12,24 +12,37 @@ import Results from './components/results';
 export default function App(props)  {
 
   const [data, setData] = useState(null);
-  const [requestParams, setParams] = useState({});
+  const [method, setMethod] = useState("");
+  const [raw, setRaw] = useState({});
+  const [url, setUrl] = useState("");
+  const [state, setState] = useState(false);
 
-  function callApi(params,fetchData){
-    // mock output
-    console.log(fetchData);
-    const data = {
-      count: fetchData.length,
-      results: fetchData,
+  async function callApi(params){
+    setMethod(params.method);
+    setUrl(params.url);
+    setRaw(params.raw);
+
+    const requestOptions = {
+      method: method,
+      body: raw,
     };
-    setData(data);
-    setParams(params);
+    setData(null);
+    setState(true);
+    let results;
+    console.log('=============>',params.method);
+    params.method ==='GET' ?
+    results = await fetch(params.url) : results = await fetch(params.url, requestOptions)
+    const dataParsed = await results.json();
+    setData(dataParsed);
+    setState(false);
+  
   }
 
     return (
       <React.Fragment>
         <Header />
         <Form handleApiCall={callApi} />
-        <Results data={data} method={requestParams.method} url={requestParams.url} />
+        <Results data={data} method={method} url={url} state={state} />
         <Footer />
       </React.Fragment>
     );

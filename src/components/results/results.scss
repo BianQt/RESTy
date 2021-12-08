@@ -2,20 +2,40 @@ $backgroundColor: #000000;
 
 
   
-  .results{
-    background: $backgroundColor;
-    color: rgb(58, 238, 52);
-    width: 40%;
-    margin: 1em auto;
-    text-align: left;
-    box-shadow: 3px 2px 5px #aaaaaabf;
-    padding: 2em 4em;
-    box-sizing: border-box;
-    max-height: max-content;
-    min-height: 26.7em;
-    
+.results{
+  background: $backgroundColor;
+  color: rgb(58, 238, 52);
+  overflow-x: auto;
+  width: 60%;
+  margin: 1em auto;
+  text-align: left;
+  box-shadow: 3px 2px 5px #aaaaaabf;
+  padding: 2em 4em;
+  box-sizing: border-box;
+  min-height: 24.5em;
   }
+  
 
   .results div{
     color: #e91857;
+  }
+  .loader {
+    border: 7px solid #343334;
+    border-radius: 50%;
+    border-top: 7px solid #34db4d;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
