@@ -5,18 +5,16 @@ import "./form.scss";
 function Form(props) {
   const [method, setMethod] = useState("GET");
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon");
+  const [show, setShow] = useState(false)
 
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = {
       method: method,
       url: url,
+      raw:e.target.data.value
     };
-
-    const raw = e.target.data.value;
-    
-
-    props.handleApiCall(formData,raw);
+    props.dispatch({type:"submit",payload: formData });
   }
 
   return (
@@ -68,6 +66,7 @@ function Form(props) {
           </span>
         </label>
         <textarea name="data" style={{ width: "500px" }}></textarea>
+        <button onClick={()=>{props.dispatch({type:"show-history"}); setShow(!show)}} > { show ? 'Go Back' : 'Show History!'}</button>
       </form>
     </>
   );
